@@ -42,10 +42,13 @@ body {
 #map g path {
   z-index: -5;
 }
-.map__info {
+.map__tooltip {
   position: absolute;
   z-index: 1000;
 
+  display: block;
+  width: auto;
+  height: auto;
   padding: 13px 9px 14px 12px;
  
   font-family: Open Sans;
@@ -58,14 +61,9 @@ body {
 
   background: #14192D;
   border: 1px solid #38ABFF;
-  box-sizing: border-box;
   border-radius: 5px;
-
-  transform: translate(-92%, -110%);
-
-  transition: 0.1s;
 }
-.map__info:after {
+.map__tooltip:after {
   content: "";
 
   position: absolute;
@@ -91,12 +89,12 @@ body {
   display: grid;
   grid-template-rows: auto 1fr;
 
+  overflow: hidden;
 
-  overflow-y: auto;
-  clip: rect(0, auto, auto, 0);
-  /* clip: rect(0 100% 100% 0); */
-
+  scrollbar-width: thin;
+  scrollbar-color: blue orange;
 }
+
 .table {
   font-family: Open Sans;
   font-style: normal;
@@ -122,6 +120,9 @@ body {
 
 
 .table__header {
+  padding-right: 10%;
+}
+.table__cell_header {
   color: #6D6D6D;
 }
 
@@ -139,20 +140,37 @@ body {
 .table__group {
   margin-top: 10px;
 }
-
+.table__main {
+  overflow: auto;
+  padding-right: 10%;
+}
+.table__main::-webkit-scrollbar {
+  position:absolute;
+  width: 3px;
+  border-radius: 1.5px;
+}
+.table__main::-webkit-scrollbar-track {
+  background-color: #BBBBBB;
+}
+.table__main::-webkit-scrollbar-thumb {
+  background-color: #14192D;
+}
 .group__header {
   cursor: pointer;
+}
+.group__header > *:first-child {
+  white-space: nowrap;
 }
 .group__header > *:first-child:after {
   content: " ▼";
   display: inline-block;
   font-size: 0.7em;
   transition: 0.2s;
-
+  
 }
 .group__main {
-  overflow: hidden;
   height: 0;
+  overflow: hidden;
 }
 .group-active {
   transition: 0.4s;

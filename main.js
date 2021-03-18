@@ -1,7 +1,6 @@
 document.addEventListener( "DOMContentLoaded" , (e) => {
-  const svgDocument = document.getElementById("map"); //получаем элмент object
-  const mapInfo = document.querySelector(".map__info");
-  const mapInfoCount = document.getElementById("map-count");
+  const svgDocument = document.getElementById("map"); 
+  
 
   const countInfo = {
     "AF": "Afghanistan", 
@@ -179,30 +178,33 @@ document.addEventListener( "DOMContentLoaded" , (e) => {
   svgDocument.addEventListener("mouseover", (e) => {
     if (e.target.id != "map") {
       const parentElement = e.target.parentElement;
+      let mapTooltip = document.getElementById("map-tooltip");
+
+      mapTooltip.classList.remove("hidden");
+
+      mapTooltip = document.getElementById("map-tooltip");
+
 
       // Перекрашиваем
       parentElement.setAttribute("fill", "#38ABFF");
 
 
       // Показываем подсказку
-      document.body.append(mapInfo);
+      document.body.append(mapTooltip);
 
       function moveAt(pageX, pageY) {
-        mapInfo.style.left = pageX  + 'px';
-        mapInfo.style.top = pageY  + 'px';
+        mapTooltip.style.left = pageX - mapTooltip.offsetWidth + 15 + 'px';
+        mapTooltip.style.top = pageY - mapTooltip.offsetHeight - 6 +'px';
       }
       
       moveAt(e.pageX, e.pageY);
-      mapInfo.classList.remove("hidden");
+      
+      
 
-      mapInfoCount.textContent = countInfo[parentElement.id] || 0;
+      mapTooltip.textContent = `Уникальные посетители - ${countInfo[parentElement.id] || 0}`;
 
-      function onmousemove(e) {
-        if (e.target.id != "map") {        
-          moveAt(e.pageX, e.pageY);     
-          
-        }    
-        // mapInfo.classList.add("hidden");
+      function onmousemove(e) {   
+        moveAt(e.pageX, e.pageY);             
       };
 
       svgDocument.addEventListener("mousemove", onmousemove);
@@ -213,7 +215,7 @@ document.addEventListener( "DOMContentLoaded" , (e) => {
 
     
         if (e.target.id != "map") {
-          mapInfo.classList.add("hidden");
+          mapTooltip.classList.add("hidden");
 
           svgDocument.removeEventListener("mousemove", onmousemove);
           svgDocument.onmouseout = null;

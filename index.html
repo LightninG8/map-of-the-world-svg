@@ -11,7 +11,7 @@
   <div class="metricks container">
     <div class="metricks__body">
       <div class="metricks__map map">
-        <div class="map__info hidden" id="map-hint">Уникальные посетители - <span id="map-count">0</span></div>
+        <div class="map__tooltip hidden" id="map-tooltip"></div>
         <svg 
           baseprofile="tiny" 
           fill="#AAAAAA"     
@@ -1640,10 +1640,10 @@
         </svg>
       </div>
       <div class="metricks__table table">
-        <div class="table__row">
-          <div class="table__header">Страна</div>
-          <div class="table__header">Посетители</div>
-          <div class="table__header">Доля</div>
+        <div class="table__header table__row">
+          <div class="table__cell_header">Страна</div>
+          <div class="table__cell_header">Посетители</div>
+          <div class="table__cell_header">Доля</div>
         </div>
         <div class="table__main">
           <div class="table__group group">
