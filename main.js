@@ -181,9 +181,8 @@ document.addEventListener( "DOMContentLoaded" , (e) => {
       const parentElement = e.target.parentElement;
 
       // Перекрашиваем
-      for (const item of parentElement.children) {
-        item.setAttribute("fill", "#38ABFF");
-      }
+      parentElement.setAttribute("fill", "#38ABFF");
+
 
       // Показываем подсказку
       document.body.append(mapInfo);
@@ -208,9 +207,8 @@ document.addEventListener( "DOMContentLoaded" , (e) => {
 
 
       svgDocument.onmouseout = (e) => {
-        for (const item of parentElement.children) {
-          item.setAttribute("fill", "#AAAAAA");
-        }
+        parentElement.setAttribute("fill", "#AAAAAA");
+
     
         if (e.target.id != "map") {
           mapInfo.classList.add("hidden");
