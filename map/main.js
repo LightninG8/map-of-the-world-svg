@@ -1,7 +1,6 @@
 document.addEventListener( "DOMContentLoaded" , (e) => {
-  const svgDocument = document.getElementById("map"); //получаем элмент object
-  const mapInfo = document.querySelector(".map__info");
-  const mapInfoCount = document.getElementById("map-count");
+  const svgDocument = document.getElementById("map"); 
+  
 
   const countInfo = {
     "AF": "Afghanistan", 
@@ -179,41 +178,44 @@ document.addEventListener( "DOMContentLoaded" , (e) => {
   svgDocument.addEventListener("mouseover", (e) => {
     if (e.target.id != "map") {
       const parentElement = e.target.parentElement;
+      let mapTooltip = document.getElementById("map-tooltip");
+
+      mapTooltip.classList.remove("hidden");
+
+      mapTooltip = document.getElementById("map-tooltip");
+
 
       // Перекрашиваем
-      for (const item of parentElement.children) {
-        item.setAttribute("fill", "#38ABFF");
-      }
+      parentElement.setAttribute("fill", "#38ABFF");
+
 
       // Показываем подсказку
-      document.body.append(mapInfo);
+      document.body.append(mapTooltip);
 
       function moveAt(pageX, pageY) {
-        mapInfo.style.left = pageX - mapInfo.offsetWidth + 13 + 'px';
-        mapInfo.style.top = pageY  - mapInfo.offsetHeight - 8 + 'px';
+        mapTooltip.style.left = pageX - mapTooltip.offsetWidth + 15 + 'px';
+        mapTooltip.style.top = pageY - mapTooltip.offsetHeight - 6 +'px';
       }
       
       moveAt(e.pageX, e.pageY);
-      mapInfo.classList.remove("hidden");
+      
+      
 
-      mapInfoCount.textContent = countInfo[parentElement.id] || 0;
+      mapTooltip.textContent = `Уникальные посетители - ${countInfo[parentElement.id] || 0}`;
 
-      function onmousemove(e) {
-        if (e.target.id != "map") {        
-          moveAt(e.pageX, e.pageY);      
-        }    
+      function onmousemove(e) {   
+        moveAt(e.pageX, e.pageY);             
       };
 
       svgDocument.addEventListener("mousemove", onmousemove);
 
 
       svgDocument.onmouseout = (e) => {
-        for (const item of parentElement.children) {
-          item.setAttribute("fill", "#AAAAAA");
-        }
+        parentElement.setAttribute("fill", "#AAAAAA");
+
     
         if (e.target.id != "map") {
-          mapInfo.classList.add("hidden");
+          mapTooltip.classList.add("hidden");
 
           svgDocument.removeEventListener("mousemove", onmousemove);
           svgDocument.onmouseout = null;
@@ -222,5 +224,16 @@ document.addEventListener( "DOMContentLoaded" , (e) => {
     }
   });
   
-  console.log(e.target)
+  // Таблица
+  const table = document.querySelector(".metricks__table");
+
+  table.addEventListener("click", (e) => {
+    const parentElement = e.target.parentElement;
+
+    if (parentElement.classList.contains("group__header")) {
+      console.log(parentElement.classList);
+
+      parentElement.parentElement.classList.toggle("group-active");
+    }
+  })
 });
