@@ -25,6 +25,10 @@ body {
 }
 .metricks__map {  
   position: relative;
+
+  display: grid;
+  align-items: center;
+
   padding-right: 4%;
 }
 .metricks__map:after {
