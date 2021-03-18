@@ -188,8 +188,8 @@ document.addEventListener( "DOMContentLoaded" , (e) => {
       document.body.append(mapInfo);
 
       function moveAt(pageX, pageY) {
-        mapInfo.style.left = pageX - mapInfo.offsetWidth + 13 + 'px';
-        mapInfo.style.top = pageY  - mapInfo.offsetHeight - 8 + 'px';
+        mapInfo.style.left = pageX  + 'px';
+        mapInfo.style.top = pageY  + 'px';
       }
       
       moveAt(e.pageX, e.pageY);
@@ -199,8 +199,10 @@ document.addEventListener( "DOMContentLoaded" , (e) => {
 
       function onmousemove(e) {
         if (e.target.id != "map") {        
-          moveAt(e.pageX, e.pageY);      
+          moveAt(e.pageX, e.pageY);     
+          
         }    
+        // mapInfo.classList.add("hidden");
       };
 
       svgDocument.addEventListener("mousemove", onmousemove);
@@ -220,5 +222,16 @@ document.addEventListener( "DOMContentLoaded" , (e) => {
     }
   });
   
-  console.log(e.target)
+  // Таблица
+  const table = document.querySelector(".metricks__table");
+
+  table.addEventListener("click", (e) => {
+    const parentElement = e.target.parentElement;
+
+    if (parentElement.classList.contains("group__header")) {
+      console.log(parentElement.classList);
+
+      parentElement.parentElement.classList.toggle("group-active");
+    }
+  })
 });
