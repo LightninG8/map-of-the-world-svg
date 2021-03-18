@@ -94,9 +94,6 @@ body {
   grid-template-rows: auto 1fr;
 
   overflow: hidden;
-
-  scrollbar-width: thin;
-  scrollbar-color: blue orange;
 }
 
 .table {
@@ -147,6 +144,9 @@ body {
 .table__main {
   overflow: auto;
   padding-right: 10%;
+
+  scrollbar-width: thin;
+  scrollbar-color: #14192D #BBBBBB;
 }
 .table__main::-webkit-scrollbar {
   position:absolute;
